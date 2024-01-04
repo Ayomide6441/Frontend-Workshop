@@ -68,7 +68,7 @@ const displayData = function (details) {
     btn.addEventListener("click", (e) => {
       const itemId = btn.dataset.id;
       data = data.filter((d) => d.id !== itemId);
-      console.log(data);
+      //   console.log(data);
       displayData(data);
     });
   });
@@ -83,7 +83,7 @@ applicationDetailForm.addEventListener("submit", (form) => {
   const formData = new FormData(form.target);
   const newData = {};
   for (const [key, value] of formData) {
-    console.log(`${key}: ${value}`);
+    // console.log(`${key}: ${value}`);
     newData[key] = value;
   }
   modal.classList.add("hidden");
@@ -92,7 +92,7 @@ applicationDetailForm.addEventListener("submit", (form) => {
     ...newData,
   });
   form.target.reset();
-  console.log(data);
+  //   console.log(data);
 
   displayData(data);
 });
