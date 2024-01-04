@@ -2,8 +2,19 @@ const openModal = document.querySelector(".open-modal");
 const modal = document.querySelector(".modal");
 const addApplication = document.querySelector(".add-application");
 const applicationContainer = document.querySelector(".application-container");
+const applicationDetailForm = document.querySelector("#aplication-detail-form");
 
-let data = [];
+let data = [
+  {
+    id: "49e7dd87-aa5f-462f-9c29-fae11156f0f1",
+    companyName: "Kibo School",
+    position: "CEO",
+    status: "applying",
+    jobLink: "https://google.com",
+    date: "2024-01-05",
+    location: "New York",
+  },
+];
 const statusColors = {
   applying: {
     text: "#4522A9",
@@ -23,9 +34,8 @@ const statusColors = {
     bg: "#EDFFEA",
   },
 };
-
-const displayData = function (data) {
-  const htmlMarkup = data.reduce((acc, curr) => {
+const displayData = function (details) {
+  const htmlMarkup = details.reduce((acc, curr) => {
     const { companyName, position, status, jobLink, date, location } = curr;
     const { text, bg } = statusColors[status];
 
@@ -46,34 +56,44 @@ const displayData = function (data) {
                 <div class="text-center break-all w-[14.29%]">${location}</div>
                 <div class="text-center break-all w-[14.29%]">${date}</div>
                 <div class="text-center break-all w-[4.29%]">
-                  <i class="fa fa-trash"></i>
+                 <button data-id="${curr.id}" class="delete-btn">
+                 <i class="fa fa-trash"></i>
+                 </button> 
                 </div>
               </div>`;
     return acc + html;
   }, "");
   applicationContainer.innerHTML = htmlMarkup;
+  document.querySelectorAll(".delete-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const itemId = btn.dataset.id;
+      data = data.filter((d) => d.id !== itemId);
+      console.log(data);
+      displayData(data);
+    });
+  });
 };
 
 openModal.addEventListener("click", function () {
   modal.classList.remove("hidden");
 });
-addApplication.addEventListener("click", function () {
-  const companyName = document.querySelector("#companyname").value;
-  const position = document.querySelector("#position").value;
-  const status = document.querySelector("#status").value;
-  const jobLink = document.querySelector("#job").value;
-  const date = document.querySelector("#date").value;
-  const location = document.querySelector("#location").value;
-  console.log(companyName, position, status, jobLink, date, location);
+
+applicationDetailForm.addEventListener("submit", (form) => {
+  form.preventDefault();
+  const formData = new FormData(form.target);
+  const newData = {};
+  for (const [key, value] of formData) {
+    console.log(`${key}: ${value}`);
+    newData[key] = value;
+  }
   modal.classList.add("hidden");
   data.push({
     id: crypto.randomUUID(),
-    companyName,
-    position,
-    status,
-    jobLink,
-    date,
-    location,
+    ...newData,
   });
+  form.target.reset();
+  console.log(data);
+
   displayData(data);
 });
+displayData(data);
