@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Applimate</title>
+  </head>
+  <body>
+    <main class="w-screen px-20">
+      <!-- Nav -->
+      <div class="flex justify-between items-center py-7">
+        <img src="AppliMate.png" alt="" />
+        <p class="text-[#4522A9] font-semibold text-xl">Chris Alade</p>
+      </div>
+      <!-- end of nav -->
+
+      <!-- Details -->
+      <div class="flex flex-col md:flex-row gap-5 mt-4">
+        <div class="flex flex-col w-96">
+          <div class="bg-[#4522A9] p-4">
+            <p class="text-white font-semibold text-xl">Resume</p>
+          </div>
+          <div class="bg-white p-4">
+            <a href="#">www.linkedin.com</a>
+          </div>
+        </div>
+        <div class="flex flex-col w-96">
+          <div class="bg-[#4522A9] p-4">
+            <p class="text-white font-semibold text-xl">Portfolio</p>
+          </div>
+          <div class="bg-white p-4">
+            <a href="#">www.linkedin.com</a>
+          </div>
+        </div>
+      </div>
+      <!-- End of details -->
+
+      <!-- Application Table -->
+      <div>
+        <h1 class="text-3xl font-bold my-8 text-[ #4F4F4F]">Applications</h1>
+        <div class="flex justify-between">
+          <div
+            class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-medium"
+          >
+            Filter
+          </div>
+          <button
+            type="button"
+            class="inline-flex items-center rounded-md bg-[#4522A9] px-3 py-2 text-sm font-semibold text-white hover:bg-[#4522A9]/90"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="mr-2 h-4 w-4"
+            >
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Add Application
+          </button>
+        </div>
+        <!-- table -->
+      </div>
+      <!-- End of application table -->
+    </main>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
