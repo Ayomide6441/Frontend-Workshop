@@ -3,6 +3,11 @@ const modal = document.querySelector(".modal");
 const addApplication = document.querySelector(".add-application");
 const applicationContainer = document.querySelector(".application-container");
 const applicationDetailForm = document.querySelector("#aplication-detail-form");
+const welcomeForm = document.querySelector("#welcome-form");
+const welcome = document.querySelector(".welcome");
+const userName = document.querySelector(".fullname");
+const resumeUrl = document.querySelector(".resume-link");
+const portfolioUrl = document.querySelector(".portfolio-link");
 
 let data = JSON.parse(localStorage.getItem("userApplications"));
 const statusColors = {
@@ -24,6 +29,40 @@ const statusColors = {
     bg: "#EDFFEA",
   },
 };
+
+function getUserDetails() {
+  const { fullName, resumeLink, portfolioLink } = JSON.parse(
+    localStorage.getItem("userDetails")
+  );
+  userName.textContent = fullName;
+  resumeUrl.innerHTML += resumeLink;
+  resumeUrl.href = resumeLink;
+  portfolioUrl.innerHTML += portfolioLink;
+  portfolioUrl.href = portfolioLink;
+}
+
+const init = function () {
+  if (!Boolean(localStorage.getItem("userDetails"))) {
+    welcome.classList.remove("hidden");
+    welcomeForm.addEventListener("submit", (form) => {
+      form.preventDefault();
+      const formData = new FormData(form.target);
+      const newData = {};
+      for (const [key, value] of formData) {
+        console.log(`${key}: ${value}`);
+        newData[key] = value;
+      }
+      welcome.classList.add("hidden");
+      localStorage.setItem("userDetails", JSON.stringify(newData));
+      form.target.reset();
+      getUserDetails();
+    });
+  } else {
+    displayData();
+    getUserDetails();
+  }
+};
+
 const displayData = function () {
   const details = JSON.parse(localStorage.getItem("userApplications"));
   const htmlMarkup = details.reduce((acc, curr) => {
@@ -33,20 +72,20 @@ const displayData = function () {
     const html = `<div
                 class="flex flex-row p-3 mt-2 justify-items-center gap-6 bg-white items-center font-medium"
               >
-                <div class="text-center break-all w-[19.29%]">${companyName}</div>
-                <div class="text-center break-all w-[19.29%]">
+                <div class=" break-all w-[19.29%]">${companyName}</div>
+                <div class=" break-all w-[19.29%]">
                   ${position}
                 </div>
                 <div
-                  class="capitalize text-center break-all w-[9.29%] text-sm rounded py-1"
-                  style="background-color:${bg};color:${text};"
-                >
-                  ${status}
+                  class="capitalize  break-all w-[9.29%] text-sm "
+                  
+                ><span style="background-color:${bg};color:${text};" class='p-1.5 rounded'>${status}</span>
+                  
                 </div>
-                <div class="text-center break-all w-[20.29%]"><a href="${jobLink}"><i class="fa fa-external-link pr-2" aria-hidden="true"></i> ${jobLink}</a></div>
-                <div class="text-center break-all w-[14.29%]">${location}</div>
-                <div class="text-center break-all w-[14.29%]">${date}</div>
-                <div class="text-center break-all w-[4.29%]">
+                <div class=" break-all w-[18.29%]"><a href="${jobLink}"><i class="fa fa-external-link pr-2" aria-hidden="true"></i> ${jobLink}</a></div>
+                <div class=" break-all w-[14.29%]">${location}</div>
+                <div class=" break-all w-[14.29%]">${date}</div>
+                <div class=" break-all w-[6.29%]">
                  <button data-id="${curr.id}" class="delete-btn">
                  <i class="fa fa-trash"></i>
                  </button> 
@@ -87,4 +126,4 @@ applicationDetailForm.addEventListener("submit", (form) => {
 
   displayData();
 });
-displayData();
+init();
