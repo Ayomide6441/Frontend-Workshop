@@ -4,17 +4,7 @@ const addApplication = document.querySelector(".add-application");
 const applicationContainer = document.querySelector(".application-container");
 const applicationDetailForm = document.querySelector("#aplication-detail-form");
 
-let data = [
-  {
-    id: "49e7dd87-aa5f-462f-9c29-fae11156f0f1",
-    companyName: "Kibo School",
-    position: "CEO",
-    status: "applying",
-    jobLink: "https://google.com",
-    date: "2024-01-05",
-    location: "New York",
-  },
-];
+let data = JSON.parse(localStorage.getItem("userApplications"));
 const statusColors = {
   applying: {
     text: "#4522A9",
@@ -34,7 +24,8 @@ const statusColors = {
     bg: "#EDFFEA",
   },
 };
-const displayData = function (details) {
+const displayData = function () {
+  const details = JSON.parse(localStorage.getItem("userApplications"));
   const htmlMarkup = details.reduce((acc, curr) => {
     const { companyName, position, status, jobLink, date, location } = curr;
     const { text, bg } = statusColors[status];
@@ -68,8 +59,8 @@ const displayData = function (details) {
     btn.addEventListener("click", (e) => {
       const itemId = btn.dataset.id;
       data = data.filter((d) => d.id !== itemId);
-      //   console.log(data);
-      displayData(data);
+      localStorage.setItem("userApplications", JSON.stringify(data));
+      displayData();
     });
   });
 };
@@ -91,9 +82,9 @@ applicationDetailForm.addEventListener("submit", (form) => {
     id: crypto.randomUUID(),
     ...newData,
   });
+  localStorage.setItem("userApplications", JSON.stringify(data));
   form.target.reset();
-  //   console.log(data);
 
-  displayData(data);
+  displayData();
 });
-displayData(data);
+displayData();
