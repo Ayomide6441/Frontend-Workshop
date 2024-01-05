@@ -40,7 +40,7 @@ const displayData = function (details) {
     const { text, bg } = statusColors[status];
 
     const html = `<div
-                class="flex flex-row p-3 justify-items-center gap-6 bg-white items-center mt-2 font-medium"
+                class="flex flex-row p-3 mt-2 justify-items-center gap-6 bg-white items-center font-medium"
               >
                 <div class="text-center break-all w-[19.29%]">${companyName}</div>
                 <div class="text-center break-all w-[19.29%]">
@@ -52,7 +52,7 @@ const displayData = function (details) {
                 >
                   ${status}
                 </div>
-                <div class="text-center break-all w-[20.29%]">${jobLink}</div>
+                <div class="text-center break-all w-[20.29%]"><a href="${jobLink}"><i class="fa fa-external-link pr-2" aria-hidden="true"></i> ${jobLink}</a></div>
                 <div class="text-center break-all w-[14.29%]">${location}</div>
                 <div class="text-center break-all w-[14.29%]">${date}</div>
                 <div class="text-center break-all w-[4.29%]">
