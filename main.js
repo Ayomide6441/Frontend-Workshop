@@ -70,22 +70,22 @@ const displayData = function () {
     const { text, bg } = statusColors[status];
 
     const html = `<div
-                class="grid grid-cols-2 md:flex md:flex-row p-3 mt-2 justify-items-center gap-6 bg-white items-center font-medium"
+                class="grid grid-cols-2 lg:flex lg:flex-row p-3 mt-2 lg:justify-items-center gap-6 bg-white lg:items-center font-medium"
               >
-                <div class=" break-all md:w-[19.29%]">${companyName}</div>
-                <div class=" break-all md:w-[19.29%]">
+                <div class=" break-all lg:w-[19.29%]">${companyName}</div>
+                <div class=" break-all lg:w-[19.29%]">
                   ${position}
                 </div>
                 <div
-                  class="capitalize  break-all md:w-[9.29%] text-sm "
+                  class="capitalize  break-all lg:w-[9.29%] text-sm "
                   
                 ><span style="background-color:${bg};color:${text};" class='p-1.5 rounded'>${status}</span>
                   
                 </div>
-                <div class=" break-all md:w-[18.29%]"><a href="${jobLink}"><i class="fa fa-external-link pr-2" aria-hidden="true"></i> ${jobLink}</a></div>
-                <div class=" break-all md:w-[14.29%]">${location}</div>
-                <div class=" break-all md:w-[14.29%]">${date}</div>
-                <div class=" break-all md:w-[6.29%]">
+                <div class=" break-all lg:w-[18.29%]"><a href="${jobLink}"><i class="fa fa-external-link pr-2" aria-hidden="true"></i> ${jobLink}</a></div>
+                <div class=" break-all lg:w-[14.29%]">${location}</div>
+                <div class=" break-all lg:w-[14.29%]">${date}</div>
+                <div class=" break-all lg:w-[6.29%]">
                  <button data-id="${curr.id}" class="delete-btn">
                  <i class="fa fa-trash"></i>
                  </button> 
