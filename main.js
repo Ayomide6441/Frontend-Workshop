@@ -9,7 +9,7 @@ const userName = document.querySelector(".fullname");
 const resumeUrl = document.querySelector(".resume-link");
 const portfolioUrl = document.querySelector(".portfolio-link");
 
-let data = JSON.parse(localStorage.getItem("userApplications"));
+let data = JSON.parse(localStorage.getItem("userApplications")) ?? [];
 const statusColors = {
   applying: {
     text: "#4522A9",
@@ -65,7 +65,7 @@ const init = function () {
 
 const displayData = function () {
   const details = JSON.parse(localStorage.getItem("userApplications"));
-  const htmlMarkup = details.reduce((acc, curr) => {
+  const htmlMarkup = details?.reduce((acc, curr) => {
     const { companyName, position, status, jobLink, date, location } = curr;
     const { text, bg } = statusColors[status];
 
@@ -93,7 +93,9 @@ const displayData = function () {
               </div>`;
     return acc + html;
   }, "");
-  applicationContainer.innerHTML = htmlMarkup;
+  applicationContainer.innerHTML =
+    htmlMarkup ||
+    `<div class='text-center text-2xl font-medium text-gray-700 bg-white p-3 mt-2'>No applications added yet</div>`;
   document.querySelectorAll(".delete-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const itemId = btn.dataset.id;
@@ -121,6 +123,7 @@ applicationDetailForm.addEventListener("submit", (form) => {
     id: crypto.randomUUID(),
     ...newData,
   });
+  console.log(data);
   localStorage.setItem("userApplications", JSON.stringify(data));
   form.target.reset();
 
